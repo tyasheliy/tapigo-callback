@@ -22,7 +22,7 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        //try {
+        try {
             $userId = null;
             if ($request->query('user') !== null &
                 auth()->id() !== $request->query('user') &
@@ -41,11 +41,11 @@ class PostController extends Controller
             }
 
             return response()->json($this->service->getPostsPreviews($userId), 200);
-        //} catch (Exception $err) {
-        //    return response()->json([
-        //        'message' => 'an error occured when trying to get posts'
-        //    ], 500);
-        //}
+        } catch (Exception $err) {
+            return response()->json([
+                'message' => 'an error occured when trying to get posts'
+            ], 500);
+        }
     }
 
     /**
